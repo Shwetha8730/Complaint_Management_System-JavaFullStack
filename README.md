@@ -1,36 +1,34 @@
 # Complaint Management System - Java Full Stack
 
-A web-based Complaint Management System built using Java JSP, Servlets and MySQL.
+A web-based complaint management system where students can raise 
+complaints online and the admin can track and resolve them efficiently.
 
 ## Technologies Used
 - Java JSP & Servlets
-- MySQL Database
-- JDBC for database connectivity
-- Bootstrap 5 for UI
-- Apache Tomcat Server
+- MySQL with JDBC
+- Bootstrap 5
+- Apache Tomcat
 - Eclipse IDE
 
 ## Features
-- User Login & Admin Login
-- User can submit complaints with category and urgency
-- User can view their own complaints
-- User can delete their complaints
-- Admin can view all complaints
-- Admin can write remarks for each complaint
-- Admin can update status (Pending / In Progress / Solved)
-- Session Management for role based access
-- Responsive UI with Bootstrap
-
-## Database Tables
-- login (username, password, role)
-- complaints (id, title, description, category, urgency, status, created_by, admin_remark)
+- Role-based login for User and Admin
+- Users can submit, view and delete their complaints
+- Admin can manage all complaints and update their status
+- Admin can add remarks visible to the user
+- Session management for secure access
 
 ## How to Run
 1. Import project in Eclipse
-2. Setup MySQL database complaint_db
-3. Run on Apache Tomcat Server
-4. Open browser: http://localhost:8181/ComplaintSystem1/jsp/login.jsp
+2. Create MySQL database `complaint_db`
+3. Deploy on Apache Tomcat Server
+4. Open: `http://localhost:8181/ComplaintSystem1/jsp/login.jsp`
 
-## Login Credentials
-- Admin: username=admin
-- User: username=user1
+## Database
+- `login` table — stores user credentials and roles
+- `complaints` table — stores all complaint details and admin responses
+
+## Test Accounts
+- Admin account: username = `admin`
+- User accounts: `user1` and `user2`
+
+> Note: Default passwords are set in the MySQL login table.
