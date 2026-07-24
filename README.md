@@ -1,6 +1,8 @@
-# Complaint Management System — Java Full Stack
+# Complaint Management System 
+### Java Servlets • JSP • JDBC • MySQL • Bootstrap 5
 
-A web-based complaint management system where students can raise complaints online with category and urgency levels, and admins can track, manage, and resolve them efficiently.
+A web-based complaint management system built using Java Servlets, JSP, JDBC, and MySQL. It enables students to submit and track complaints while providing administrators with a centralized dashboard to manage complaints, update status, and add remarks.
+
 
 ![Java](https://img.shields.io/badge/Java-Servlets-blue)
 ![MySQL](https://img.shields.io/badge/Database-MySQL-green)
@@ -9,11 +11,30 @@ A web-based complaint management system where students can raise complaints onli
 
 ---
 
+## 📸 Screenshots
+
+The following screenshots showcase the login interface, student dashboard, and administrator dashboard.
+
+### 🔐 Login Page
+
+![Login](screenshots/login.png)
+
+### 👨‍🎓 User Dashboard
+
+![User Dashboard](screenshots/user-dashboard.png)
+
+### 👨‍💼 Admin Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+---
+
+
 ## Tech Stack
 
 | Layer | Technology |
-|---|---|
-| Frontend | JSP, Bootstrap 5, HTML/CSS |
+| :--- | :--- |
+| Frontend | JSP, Bootstrap 5, Bootstrap Icons, HTML/CSS |
 | Backend | Java Servlets |
 | Database | MySQL with JDBC |
 | Server | Apache Tomcat |
@@ -23,22 +44,38 @@ A web-based complaint management system where students can raise complaints onli
 
 ## Features
 
-### Student
-- Register and log in securely
-- Submit complaints with **category** and **urgency level**
-- View their own complaint history and current status
-- Delete their submitted complaints
-- View admin remarks on each complaint
+### 👨‍🎓 Student Features
 
-### Admin
-- View all complaints from all users
-- Update complaint status — `Pending` / `In Progress` / `Solved`
-- Add remarks visible to the student
-- Role-based session-secured access
+- Secure login using session management
+- Submit complaints with category and urgency level
+- View personal complaint history
+- Track complaint status (Pending, In Progress, Solved)
+- View admin remarks and updates
+- Delete submitted complaints
+
+### 👨‍💼 Admin Features
+
+- Secure admin login
+- View all complaints
+- Dashboard with complaint statistics
+- Update complaint status
+- Add remarks for students
+- Delete complaints
+- Session-based role authorization
+
+### ⚙️ Technical Highlights
+
+- MVC architecture (Servlets + JSP)
+- JDBC integration with MySQL
+- Role-based authentication and session management
+- Complaint analytics dashboard
+- Responsive Bootstrap 5 interface
+
+
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 ### `login`
 | Column | Type | Description |
@@ -61,11 +98,11 @@ A web-based complaint management system where students can raise complaints onli
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/your-username/ComplaintSystem.git
+git clone https://github.com/Shwetha8730/ComplaintSystem1.git
 ```
 
 **2. Set up the database**
@@ -110,7 +147,7 @@ http://localhost:8181/ComplaintSystem1/jsp/login.jsp
 
 ---
 
-## Test Accounts
+## 🔑 Test Accounts
 
 > Passwords are set directly in the MySQL `login` table.
 
@@ -122,18 +159,56 @@ http://localhost:8181/ComplaintSystem1/jsp/login.jsp
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
-```
-ComplaintSystem/
+```text
+ComplaintSystem1/
+│
+├── screenshots/
+│   ├── login.png
+│   ├── user-dashboard.png
+│   └── admin-dashboard.png
+│
 ├── src/
-│   └── servlets/         # Java Servlets for all actions
-├── WebContent/
-│   ├── jsp/              # JSP pages (login, dashboard, complaint form)
-│   └── css/              # Stylesheets
-└── README.md
+│   └── main/
+│       ├── java/
+│       │   ├── controller/
+│       │   │   ├── AddComplaintServlet.java
+│       │   │   ├── DeleteComplaintServlet.java
+│       │   │   ├── LoginServlet.java
+│       │   │   ├── LogoutServlet.java
+│       │   │   ├── UpdateRemarkServlet.java
+│       │   │   ├── UpdateStatusServlet.java
+│       │   │   └── ViewComplaintServlet.java
+│       │   │
+│       │   └── util/
+│       │       └── DBConnection.java
+│       │
+│       └── webapp/
+│           ├── css/
+│           │   └── style.css
+│           │
+│           ├── jsp/
+│           │   ├── login.jsp
+│           │   ├── home.jsp
+│           │   └── view.jsp
+│           │
+│           ├── META-INF/
+│           └── WEB-INF/
+│               └── web.xml
+│
+├── build/
+├── README.md
+└── Referenced Libraries
 ```
 
 ---
 
-> Built with Java Servlets · JSP · MySQL · Bootstrap 5 · Apache Tomcat
+## 👩‍💻 Author
+
+ **Shwethashree S**
+ 
+ Information Science & Engineering Student 
+  
+
+**Technologies:** Java • JSP • Servlets • JDBC • MySQL • Bootstrap 5 • Apache Tomcat
