@@ -82,6 +82,34 @@ body{
         margin-top: 10px;
         border: 1px solid #e5e7eb;
     }
+    .page-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:34px;
+    font-weight:700;
+}
+
+.stats-card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.stats-card:hover{
+    transform:translateY(-4px);
+}
+
+.stats-number{
+    font-size:30px;
+    font-weight:700;
+    font-family:'Space Grotesk',sans-serif;
+}
+
+.stats-title{
+    font-size:14px;
+    color:#6c757d;
+    font-weight:600;
+}
 </style>
 </head>
 <body>
@@ -132,21 +160,79 @@ body{
 
 </nav>
 
-<div class="container mt-4">
+<div class="container py-5" style="max-width:1200px;">
 
-   <div class="mb-4">
+<div class="mb-4">
 
 <% if("admin".equals(role)){ %>
 
-<h2 class="fw-bold">Complaint Dashboard</h2>
+<h2 class="page-title">
+    <i class="bi bi-speedometer2 me-2"></i>
+    Complaint Dashboard
+</h2>
 
 <p class="text-muted">
     Manage user complaints and update their progress.
 </p>
 
+<div class="row g-3 mb-4">
+
+    <div class="col-md-3">
+        <div class="card stats-card text-center p-3">
+            <div class="stats-title">
+            <i class="bi bi-list-task me-1"></i>
+              Total Complaints
+           </div>
+            <div class="stats-number text-dark">
+                <%= request.getAttribute("totalComplaints") %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stats-card text-center p-3">
+            <div class="stats-title">
+              <i class="bi bi-hourglass me-1"></i>
+              Pending
+           </div>
+            <div class="stats-number text-warning">
+                <%= request.getAttribute("pendingComplaints") %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stats-card text-center p-3">
+            <div class="stats-title">
+            <i class="bi bi-arrow-repeat me-1"></i>
+             In Progress
+           </div>
+            <div class="stats-number text-primary">
+                <%= request.getAttribute("inProgressComplaints") %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card stats-card text-center p-3">
+            <div class="stats-title">
+              <i class="bi bi-check-circle-fill me-1"></i>
+                 Solved
+            </div>
+            <div class="stats-number text-success">
+                <%= request.getAttribute("solvedComplaints") %>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <% } else { %>
 
-<h2 class="fw-bold">My Complaints</h2>
+<h2 class="page-title">
+    <i class="bi bi-clipboard-check-fill me-2"></i>
+    My Complaints
+</h2>
 
 <p class="text-muted">
     Track your submitted complaints and monitor their current status.
@@ -176,28 +262,49 @@ while(rs.next()){
 %>
 
 <div class="card p-3">
-    <div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex justify-content-between align-items-start gap-3">
         <div style="width:100%">
             <span class="badge bg-<%= urgencyColor %> me-1"><%= urgency %></span>
             <span class="badge <%= badgeClass %>"><%= status %></span>
-            <% if("admin".equals(role)){ %>
-            <span class="text-muted small ms-2">by <%= createdBy %></span>
-            <% } %>
+            
+            <h5 class="fw-bold mt-3 mb-2">
+    <%= rs.getString("title") %>
+</h5>
 
-            <h6 class="mt-2 fw-bold mb-1"><%= rs.getString("title") %></h6>
-            <small class="text-muted">Category: <%= category %></small>
-            <p class="mt-1 mb-2 text-secondary"><%= rs.getString("description") %></p>
+<div class="small text-muted mb-2">
+
+    <span class="me-3">
+        <i class="bi bi-folder-fill me-1"></i>
+        <strong>Category:</strong> <%= category %>
+    </span>
+
+    <% if("admin".equals(role)){ %>
+
+    <span>
+        <i class="bi bi-person-fill me-1"></i>
+        <strong>User:</strong> <%= createdBy %>
+    </span>
+
+    <% } %>
+
+</div>
+            <p class="mt-2 mb-2 text-secondary lh-lg"><%= rs.getString("description") %></p>
 
             <!-- ADMIN: Show remark input box -->
             <% if("admin".equals(role)){ %>
             <div class="admin-remark-area">
-                <label class="form-label fw-semibold small mb-1">Admin Remark / Update for User:</label>
+                <label class="form-label fw-semibold small mb-1">
+                    <i class="bi bi-pencil-square me-1"></i>
+                        Admin Update
+                 </label>
                 <form action="${pageContext.request.contextPath}/UpdateRemarkServlet" method="post" class="d-flex gap-2">
                     <input type="hidden" name="id" value="<%= rs.getInt("id") %>">
                     <input type="text" name="remark" class="form-control form-control-sm"
                            placeholder="Write update for user..."
                            value="<%= remark != null ? remark : "" %>">
-                    <button type="submit" class="btn btn-sm btn-primary" style="white-space:nowrap">Save Remark</button>
+                    <button type="submit" class="btn btn-sm btn-primary" style="white-space:nowrap">
+                     <i class="bi bi-save me-1"></i> Save
+                  </button>
                 </form>
             </div>
             <% } %>
@@ -206,31 +313,49 @@ while(rs.next()){
             <% if(!"admin".equals(role) && remark != null && !remark.trim().isEmpty()){ %>
                 <% if("Solved".equals(status)){ %>
                 <div class="remark-box">
-                    <strong>Admin Response:</strong> <%= remark %>
+                    <strong>
+                    <i class="bi bi-chat-left-text-fill me-1"></i>
+                   Admin Response:
+                   </strong> 
+                <%= remark %>
                 </div>
                 <% } else if("In Progress".equals(status)){ %>
                 <div class="remark-box-progress">
-                    <strong>Admin Update:</strong> <%= remark %>
+                    <strong>
+                     <i class="bi bi-chat-dots-fill me-1"></i>
+                      Admin Update:
+                  </strong> <%= remark %>
                 </div>
                 <% } %>
             <% } %>
 
         </div>
-       <span class="badge bg-dark ms-3 px-3 py-2">
-            CMP-<%= String.format("%04d", rs.getInt("id")) %>
-      </span>>
+      <span class="badge bg-dark px-3 py-2 fw-semibold align-self-start">
+      CMP-<%= String.format("%04d", rs.getInt("id")) %>
+    </span>
     </div>
 
-    <div class="d-flex gap-2 mt-2 flex-wrap">
+<div class="d-flex gap-2 mt-3 flex-wrap">
         <% if("admin".equals(role)){ %>
+        
         <a href="${pageContext.request.contextPath}/UpdateStatusServlet?id=<%= rs.getInt("id") %>&status=In Progress"
-           class="btn btn-sm btn-info text-white">In Progress</a>
-        <a href="${pageContext.request.contextPath}/UpdateStatusServlet?id=<%= rs.getInt("id") %>&status=Solved"
-           class="btn btn-sm btn-success">Solved</a>
+          class="btn btn-sm btn-info text-white">
+             <i class="bi bi-hourglass-split me-1"></i>
+            In Progress
+        </a>
+
+    <a href="${pageContext.request.contextPath}/UpdateStatusServlet?id=<%= rs.getInt("id") %>&status=Solved"
+       class="btn btn-sm btn-success">
+    <i class="bi bi-check-circle-fill me-1"></i>
+    Solved
+</a>
         <% } %>
         <a href="${pageContext.request.contextPath}/DeleteComplaintServlet?id=<%= rs.getInt("id") %>"
-           class="btn btn-sm btn-danger"
-           onclick="return confirm('Delete this complaint?')">Delete</a>
+   class="btn btn-sm btn-danger"
+   onclick="return confirm('Delete this complaint?')">
+    <i class="bi bi-trash-fill me-1"></i>
+    Delete
+     </a>
     </div>
 </div>
 
@@ -245,5 +370,13 @@ if(!hasComplaints){ %>
 <% } %>
 
 </div>
+
+<footer class="text-center py-4 mt-5 text-muted border-top">
+    <small>
+        Complaint Management System • Campus Maintenance & Facility Support
+        <br>
+        © 2026 Presidency University
+    </small>
+</footer>
 </body>
 </html>

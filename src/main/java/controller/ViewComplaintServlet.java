@@ -21,7 +21,37 @@ public class ViewComplaintServlet extends HttpServlet {
         }
 
         try {
-            Connection con = DBConnection.getConnection();
+        	Connection con = DBConnection.getConnection();
+
+        	// Dashboard statistics
+            int totalComplaints = 0;
+            int pendingComplaints = 0;
+            int inProgressComplaints = 0;
+            int solvedComplaints = 0;
+
+            Statement stmt = con.createStatement();
+
+            ResultSet totalRs = stmt.executeQuery("SELECT COUNT(*) FROM complaints");
+            if(totalRs.next())
+                totalComplaints = totalRs.getInt(1);
+
+            ResultSet pendingRs = stmt.executeQuery(
+                "SELECT COUNT(*) FROM complaints WHERE status='Pending'"
+            );
+            if(pendingRs.next())
+                pendingComplaints = pendingRs.getInt(1);
+
+            ResultSet progressRs = stmt.executeQuery(
+                "SELECT COUNT(*) FROM complaints WHERE status='In Progress'"
+            );
+            if(progressRs.next())
+                inProgressComplaints = progressRs.getInt(1);
+
+            ResultSet solvedRs = stmt.executeQuery(
+                "SELECT COUNT(*) FROM complaints WHERE status='Solved'"
+            );
+            if(solvedRs.next())
+                solvedComplaints = solvedRs.getInt(1);
             PreparedStatement ps;
 
             if("admin".equals(role)) {
@@ -36,6 +66,10 @@ public class ViewComplaintServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             req.setAttribute("data", rs);
             req.setAttribute("role", role);
+            req.setAttribute("totalComplaints", totalComplaints);
+            req.setAttribute("pendingComplaints", pendingComplaints);
+            req.setAttribute("inProgressComplaints", inProgressComplaints);
+            req.setAttribute("solvedComplaints", solvedComplaints);
             req.getRequestDispatcher("/jsp/view.jsp").forward(req, res);
 
         } catch(Exception e) {

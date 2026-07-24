@@ -80,10 +80,16 @@ body{
 
 .feature{
     margin-top:18px;
-    padding:12px;
-    border-left:4px solid var(--primary);
-    background:#f8fafc;
-    border-radius:10px;
+    padding:14px;
+    border-left:5px solid var(--primary);
+    background:#F8FAFC;
+    border-radius:12px;
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateX(4px);
+    background:#EEF3F8;
 }
 
 .form-label{
@@ -159,6 +165,10 @@ margin-bottom:25px;
     text-transform:uppercase;
 }
 
+footer{
+    font-size:14px;
+}
+
 </style>
 </head>
 <body>
@@ -203,8 +213,7 @@ margin-bottom:25px;
         <p class="dashboard-subtitle">
             Track your complaints or raise a new request below.
         </p>
-    </div>
-
+ </div>
     <div class="row g-4">
 
         <!-- Left Side -->
@@ -218,7 +227,8 @@ margin-bottom:25px;
                 </div>
 
                 <h4 class="fw-bold mb-3">
-                    My Complaints
+                   <i class="bi bi-clipboard-check-fill me-2"></i>
+                     My Complaints
                 </h4>
 
                 <p class="text-muted">
@@ -226,17 +236,17 @@ margin-bottom:25px;
                 </p>
 
                 <div class="feature">
-                    <strong>✔ Easy Submission</strong><br>
+                    <strong><i class="bi bi-lightning-charge-fill"></i> Easy Submission</strong><br>
                     Submit complaints in less than a minute.
                 </div>
 
                 <div class="feature">
-                    <strong>✔ Real-time Tracking</strong><br>
+                    <strong><i class="bi bi-clock-history"></i> Real-time Tracking</strong><br>
                     Monitor complaint progress from your dashboard.
                 </div>
 
                 <div class="feature">
-                    <strong>✔ Secure Management</strong><br>
+                    <strong><i class="bi bi-shield-lock-fill"></i> Secure Management</strong><br>
                     Your complaint history is safely maintained.
                 </div>
 
@@ -251,14 +261,15 @@ margin-bottom:25px;
             <div class="form-card">
 
                 <h4 class="fw-bold mb-4">
-                    Raise New Complaint
+                 <i class="bi bi-pencil-square me-2"></i>
+                   Raise New Complaint
                 </h4>
 
                 <form action="${pageContext.request.contextPath}/AddComplaintServlet" method="post">
 
                     <div class="mb-3">
 
-    <label class="form-label">Category</label>
+    <label class="form-label"><i class="bi bi-folder-fill me-2"></i>Category</label>
 
     <select name="category" class="form-select" required>
 
@@ -275,7 +286,7 @@ margin-bottom:25px;
 
 <div class="mb-3">
 
-    <label class="form-label">Complaint Title</label>
+    <label class="form-label"><i class="bi bi-pencil-square me-2"></i>Complaint Title</label>
 
     <input type="text"
            name="title"
@@ -287,25 +298,19 @@ margin-bottom:25px;
 
                     <div class="mb-3">
 
-                        <label class="form-label">
-                            Description
-                        </label>
-
+                        <label class="form-label"><i class="bi bi-card-text me-2"></i>Description</label>
                         <textarea
                             name="description"
                             rows="5"
                             class="form-control"
-                            placeholder="Describe your complaint..."
+                            placeholder="Provide a detailed description of your issue..."
                             required></textarea>
 
                     </div>
 
                     <div class="mb-4">
 
-                        <label class="form-label">
-                            Urgency
-                        </label>
-
+                        <label class="form-label"><i class="bi bi-exclamation-triangle-fill me-2"></i>Urgency</label>
                         <div class="d-flex flex-wrap gap-2">
 
                             <input type="radio" class="btn-check"
@@ -354,5 +359,12 @@ margin-bottom:25px;
     </div>
 
 </div>
+<footer class="text-center py-4 mt-5 text-muted border-top">
+    <small>
+        Complaint Management System • Campus Maintenance & Facility Support
+        <br>
+        © 2026 Presidency University
+    </small>
+</footer>
 </body>
 </html>
