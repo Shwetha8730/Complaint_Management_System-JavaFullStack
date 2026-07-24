@@ -5,26 +5,58 @@
 <head>
 <title>Complaints</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
-    .navbar { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
-    .card {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        margin-bottom: 15px;
-    }
+body{
+    background:#f0f2f5;
+    font-family:'Inter',sans-serif;
+    color:#2D3748;
+}
+    .navbar{
+    background:linear-gradient(135deg,#23313A,#2F4858);
+    padding:12px 28px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.navbar-brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:28px;
+    font-weight:700;
+}
+
+.portal-badge{
+    background:#fff;
+    color:#23313A;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:5px 10px;
+    border-radius:16px;
+    text-transform:uppercase;
+}
+
+.navbar .btn{
+    padding:8px 18px;
+    font-weight:600;
+}
+
+.card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+    margin-bottom:20px;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 35px rgba(0,0,0,.10);
+}
+
     .badge-pending { background-color: #f59e0b; }
     .badge-progress { background-color: #3b82f6; }
     .badge-solved { background-color: #10b981; }
-    .role-tag {
-        background: #ede9fe;
-        color: #5b21b6;
-        font-size: 12px;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-weight: 600;
-    }
     .remark-box {
         background: #f0fdf4;
         border-left: 4px solid #10b981;
@@ -63,34 +95,66 @@
     }
 %>
 
-<nav class="navbar navbar-dark px-4 py-3 d-flex justify-content-between">
-    <span class="navbar-brand fw-bold fs-5">
-        Complaint System &nbsp;
-        <span class="role-tag"><%= "admin".equals(role) ? "Admin" : "User" %></span>
-    </span>
+<nav class="navbar navbar-dark d-flex justify-content-between align-items-center">
+
+    <div class="d-flex align-items-center gap-3">
+
+        <span class="navbar-brand mb-0 d-flex align-items-center gap-2">
+            <i class="bi bi-buildings-fill fs-3"></i>
+            Complaint Management System
+        </span>
+
+        <span class="portal-badge">
+            <%= "admin".equals(role) ? "ADMIN PORTAL" : "USER PORTAL" %>
+        </span>
+
+    </div>
+
     <div class="d-flex gap-2 align-items-center">
-        <span class="text-white-50 small">Hello, <%= loggedUser %></span>
+
+        <span class="text-white-50 small">
+            Hello, <%= loggedUser %>
+        </span>
+
         <% if(!"admin".equals(role)){ %>
         <a href="${pageContext.request.contextPath}/jsp/home.jsp"
-           class="btn btn-light btn-sm">+ New Complaint</a>
+           class="btn btn-light btn-sm">
+            + New Complaint
+        </a>
         <% } %>
+
         <a href="${pageContext.request.contextPath}/LogoutServlet"
-           class="btn btn-outline-light btn-sm">Logout</a>
+           class="btn btn-outline-light btn-sm">
+            Logout
+        </a>
+
     </div>
+
 </nav>
 
 <div class="container mt-4">
 
-    <% if("admin".equals(role)){ %>
-    <div class="alert alert-info py-2">
-        <strong>Admin View:</strong> You can see all complaints, write remarks, and update status.
-    </div>
-    <% } else { %>
-    <div class="alert alert-secondary py-2">
-        <strong>My Complaints:</strong> Only your submitted complaints are shown here.
-    </div>
-    <% } %>
+   <div class="mb-4">
 
+<% if("admin".equals(role)){ %>
+
+<h2 class="fw-bold">Complaint Dashboard</h2>
+
+<p class="text-muted">
+    Manage user complaints and update their progress.
+</p>
+
+<% } else { %>
+
+<h2 class="fw-bold">My Complaints</h2>
+
+<p class="text-muted">
+    Track your submitted complaints and monitor their current status.
+</p>
+
+<% } %>
+
+</div>
 <%
 ResultSet rs = (ResultSet) request.getAttribute("data");
 boolean hasComplaints = false;
@@ -152,7 +216,9 @@ while(rs.next()){
             <% } %>
 
         </div>
-        <small class="text-muted ms-3">#<%= rs.getInt("id") %></small>
+       <span class="badge bg-dark ms-3 px-3 py-2">
+            CMP-<%= String.format("%04d", rs.getInt("id")) %>
+      </span>>
     </div>
 
     <div class="d-flex gap-2 mt-2 flex-wrap">
