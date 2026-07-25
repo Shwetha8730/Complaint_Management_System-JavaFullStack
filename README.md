@@ -46,7 +46,7 @@ The following screenshots showcase the login interface, student dashboard, and a
 
 ### 👨‍🎓 Student Features
 
-- Secure login using session management
+- Session-based login and user authentication
 - Submit complaints with category and urgency level
 - View personal complaint history
 - Track complaint status (Pending, In Progress, Solved)
@@ -55,7 +55,7 @@ The following screenshots showcase the login interface, student dashboard, and a
 
 ### 👨‍💼 Admin Features
 
-- Secure admin login
+- Session-based admin login
 - View all complaints
 - Dashboard with complaint statistics
 - Update complaint status
@@ -68,9 +68,8 @@ The following screenshots showcase the login interface, student dashboard, and a
 - MVC architecture (Servlets + JSP)
 - JDBC integration with MySQL
 - Role-based authentication and session management
-- Complaint analytics dashboard
+- Complaint statistics dashboard
 - Responsive Bootstrap 5 interface
-
 
 
 ---
@@ -91,7 +90,7 @@ The following screenshots showcase the login interface, student dashboard, and a
 | title | VARCHAR | Short complaint title |
 | description | TEXT | Detailed complaint content |
 | category | VARCHAR | Complaint category |
-| urgency | VARCHAR | Urgency level (Low / Medium / High) |
+| urgency | VARCHAR | Urgency level (Basic / Medium / Critical) |
 | status | VARCHAR | `Pending` / `In Progress` / `Solved` |
 | created_by | VARCHAR | FK → login.username |
 | admin_remark | TEXT | Admin's response note |
@@ -208,7 +207,9 @@ ComplaintSystem1/
 
  **Shwethashree S**
  
- Information Science & Engineering Student 
+B.Tech – Information Science & Engineering (AI & Robotics)
+
+Presidency University, Bengaluru.
   
 
 **Technologies:** Java • JSP • Servlets • JDBC • MySQL • Bootstrap 5 • Apache Tomcat
