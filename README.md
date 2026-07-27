@@ -30,7 +30,7 @@ The following screenshots showcase the login interface, student dashboard, and a
 ---
 
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 | :--- | :--- |
@@ -42,9 +42,9 @@ The following screenshots showcase the login interface, student dashboard, and a
 
 ---
 
-## Features
+## ✨ Features
 
-### 👨‍🎓 Student Features
+### 💻 Student Features
 
 - Session-based login and user authentication
 - Submit complaints with category and urgency level
@@ -53,7 +53,7 @@ The following screenshots showcase the login interface, student dashboard, and a
 - View admin remarks and updates
 - Delete submitted complaints
 
-### 👨‍💼 Admin Features
+### 🛡️ Admin Features
 
 - Session-based admin login
 - View all complaints
